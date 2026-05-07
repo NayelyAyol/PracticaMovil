@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +9,14 @@ import { environment } from '../../environments/environment';
 export class SupabaseService {
   private supabase: SupabaseClient;
 
-  constructor() {
+  constructor(
+    private router: Router
+  ) {
     this.supabase = createClient(
       environment.supabaseUrl,
       environment.supabaseKey
     );
+
   }
 
   login(email: string, password: string) {
@@ -29,7 +33,8 @@ export class SupabaseService {
     });
   }
 
-  logout() {
-    return this.supabase.auth.signOut();
+  async logout() {
+    await this.supabase.auth.signOut();
+    this.router.navigateByUrl('/login');
   }
 }

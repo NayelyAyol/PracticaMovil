@@ -50,6 +50,12 @@ export class LoginPage {
   ) {}
 
   async login() {
+  
+    if (!this.email || !this.password){
+      this.mensaje="Todos los campos son obligatorios";
+      return;
+    }
+
     const { error } = await this.supabaseService.login(
       this.email,
       this.password
@@ -60,10 +66,14 @@ export class LoginPage {
       return;
     }
 
-    this.router.navigateByUrl('/home');
+    this.router.navigateByUrl('/home', {replaceUrl:true});
   }
 
   async register() {
+    if (!this.email || !this.password){
+      this.mensaje="Todos los capos son obligatorios";
+    }
+
     const { error } = await this.supabaseService.register(
       this.email,
       this.password
@@ -76,4 +86,5 @@ export class LoginPage {
 
     this.mensaje = 'Usuario registrado';
   }
+
 }
