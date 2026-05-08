@@ -1,9 +1,10 @@
-import type { CapacitorConfig } from '@capacitor/cli';
+import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
-  appName: 'login-supabase',
-  webDir: 'www'
+  appName: 'PracticaMovil',
+  webDir: 'www',
+  bundledWebRuntime: false
 };
 
 export default config;
